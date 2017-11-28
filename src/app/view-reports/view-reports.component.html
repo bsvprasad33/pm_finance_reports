@@ -1,0 +1,42 @@
+<form>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title marginB10 marginT10">
+        Snapshot Details
+      </div>
+    </div>
+    <div class="panel-body">
+      <table class="table table-stripped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Select</th>
+            <th scope="col">Snapshot Name</th>
+            <th scope="col">RTBR</th>
+            <th scope="col">Finpulse</th>
+            <th scope="col">OMS</th>
+            <th scope="col">Process</th>
+            <th scope="col">View Dashboard</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let snapshot of snapshots">
+            <th scope="row">
+              <input type="checkbox" name="selection" (click)="SelectSnapShot(snapshot)" />
+            </th>
+            <td>{{snapshot.name}}</td>
+            <td>{{snapshot.RTBR}}</td>
+            <td>{{snapshot.Finpulse}}</td>
+            <td>{{snapshot.OMS}}</td>
+            <td><button type="submit" id="Generate" class="btn btn-primary" [class.btn-primary] = "snapshot.RTBR && snapshot.Finpulse && snapshot.OMS" >Generate</button></td>
+            <td><button type="submit" id="viewDetails" class="btn btn-primary">View</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</form>
+<!--<ul class="heroes">
+    <li *ngFor = "let snapshot of snapshots">
+        <span class="badge">{{snapshot.id}}</span> {{snapshot.name}}
+    </li>
+  </ul> -->

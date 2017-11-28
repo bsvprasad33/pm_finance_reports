@@ -1,0 +1,39 @@
+<form>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title marginB10 marginT10">
+        Snapshot Details
+      </div>
+    </div>
+    <div class="panel-body">
+      <table class="table table-stripped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Select</th>
+            <th scope="col">Snapshot Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let snapshot of snapshots">
+            <th scope="row">
+              <input type="radio" name="selection" (click)="SelectSnapShot(snapshot)" />
+            </th>
+            <td>{{snapshot.name}}</td>
+            <td>{{snapshot.description}}</td>
+            <td>11/23/2017</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel-footer controls">
+      <button type="submit" class="btn btn-primary pullRight" (click)="uploadBEReports()"> Upload </button>
+    </div>
+  </div>
+</form>
+<!--<ul class="heroes">
+    <li *ngFor = "let snapshot of snapshots">
+        <span class="badge">{{snapshot.id}}</span> {{snapshot.name}}
+    </li>
+  </ul> -->

@@ -1,0 +1,24 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="form-horizontal form-sm">
+      <div class="form-group row marginT10" >
+        <label class="col-md-6">Create Snapshot Name </label>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-3">Snapshot Name:</label>
+        <div class="col-md-8">
+          <input type="text" class="form-control" [(ngModel)]="snapshotName" id="snapshotName" placeholder="Enter Snaphsot Name" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-3">Snapshot Description:</label>
+        <div class="col-md-8">
+          <textarea type="text" class="form-control" [(ngModel)]="snapshotDesc" id="snapshotDesc" rows="6" cols="70" placeholder="Enter Snaphsot Description"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel-footer controls">
+    <button type="submit" class="btn btn-primary pullRight" (click)="saveSnapshotDetails()"> Save </button>
+  </div>
+</div>
