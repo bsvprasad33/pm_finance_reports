@@ -2,17 +2,17 @@
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
-    <a class="nav-link active" data-toggle="tab" href="#createSnapshot" role="tab" aria-controls="home" aria-selected="true">Create SnapShot</a>
+    <a class="nav-link active" data-toggle="tab" role="tab" href="#createSnapshot"  (click) = "changeView('create')" aria-controls="home" aria-selected="true">Create SnapShot</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#uploadReports" role="tab" aria-controls="profile" aria-selected="false">Upload Reports</a>
+    <a class="nav-link" data-toggle="tab" role="tab" href="#uploadReports" (click) = "changeView('upload')" aria-controls="profile" aria-selected="false">Upload Reports</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#viewDetails" role="tab" aria-controls="profile" aria-selected="false">View SnapShot Details</a>
+    <a class="nav-link" data-toggle="tab" href="#viewDetails" role="tab" (click) = "changeView('view')" aria-controls="profile" aria-selected="false">View SnapShot Details</a>
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
-  <snapshot-creation class="tab-pane fade show active" id="createSnapshot" role="tabpanel" aria-labelledby="home-tab"></snapshot-creation>
-  <upload-reports class="tab-pane fade" id="uploadReports" role="tabpanel" aria-labelledby="upload-tab"></upload-reports>
-  <view-reports class="tab-pane fade" id="viewDetails" role="tabpanel" aria-labelledby="view-tab"></view-reports>
+  <snapshot-creation *ngIf = "viewName == 'create'" class="fade show active" id="createSnapshot" role="tabpanel" aria-labelledby="home-tab"></snapshot-creation>
+  <upload-reports *ngIf = "viewName == 'upload'" class="tab-pane fade" id="uploadReports" role="tabpanel" aria-labelledby="upload-tab"></upload-reports>
+  <view-reports *ngIf = "viewName == 'view'" class="fade" id="viewDetails" role="tabpanel" aria-labelledby="view-tab"></view-reports>
 </div>

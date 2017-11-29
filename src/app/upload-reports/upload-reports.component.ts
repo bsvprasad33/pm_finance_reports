@@ -41,7 +41,9 @@ export class UploadReportsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log("upload reports");
   }
+  
   SelectSnapShot(snapshot : SnapShot) : void {
     this.selectedSnapshot = snapshot.id;
   }

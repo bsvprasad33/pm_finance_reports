@@ -1,4 +1,4 @@
-import { Component } from "@angular/core"
+import { Component , OnInit } from "@angular/core"
 
 
 @Component( {
@@ -6,6 +6,9 @@ import { Component } from "@angular/core"
     templateUrl : './volumess-details.component.html'
 })
 
-export class VolumessDetailsComponent{
+export class VolumessDetailsComponent implements OnInit{
     title = "Volume Dashboard";
+    ngOnInit() {
+        console.log("volumes");
+    }
 }

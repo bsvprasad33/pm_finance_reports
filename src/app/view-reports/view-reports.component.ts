@@ -58,7 +58,8 @@ export class ViewReportsComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+   ngOnInit() {
+        console.log("view reports");
+    }
 
 }
