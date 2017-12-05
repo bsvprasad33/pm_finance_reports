@@ -2,37 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import 'rxjs/add/operator/take';
 import { Router } from '@angular/router';
+import { SnapShot } from '../CreateSnapShot/snapshot'
+import { FinanceReportsService } from '../finance-reports.service';
 
 import { FileUploadComponent } from '../file-upload/file-upload.component'
 
 
-const snapshots = [{
-    id : 1,
-    name : "SS1",
-    description : "SS Description"
-},{
-    id : 2,
-    name : "SS2",
-    description : "SS Description"
-},{
-    id : 3,
-    name : "SS3",
-    description : "SS Description"
-},{
-    id : 4,
-    name : "SS4",
-    description : "SS Description"
-},{
-    id : 5,
-    name : "SS5",
-    description : "SS Description"
-}]
-
-class SnapShot {
-  id : number;
-  name : string;
-  description : string;
-}
 
 @Component({
   selector: 'upload-reports',
@@ -41,13 +16,13 @@ class SnapShot {
 })
 
 export class UploadReportsComponent implements OnInit {
-  snapshots : SnapShot[] = snapshots;
+  snapshots : SnapShot[];
   selectedSnapshot : number;
   bsModalRef : BsModalRef;
-  constructor(private router : Router , private modelService : BsModalService) { }
+  constructor(private router : Router , private modelService : BsModalService, private financeReportsService : FinanceReportsService) { }
 
   ngOnInit() {
-    console.log("upload reports");
+    this.financeReportsService.getSnapShotDetails().then(snapshotDetails => this.snapshots = snapshotDetails);
   }
   
   SelectSnapShot(snapshot : SnapShot) : void {
@@ -58,8 +33,13 @@ export class UploadReportsComponent implements OnInit {
    console.log(snapshot);
   }
   uploadBEReports() : void {
-    this.bsModalRef  = this.modelService.show(FileUploadComponent);
-    this.bsModalRef.content.title = 'Upload Reports';
+    this.financeReportsService.getTransactionDetails(this.selectedSnapshot).then(uploadedReports => {
+      this.bsModalRef  = this.modelService.show(FileUploadComponent ,{class: 'modal-md', ignoreBackdropClick: true ,keyboard:false});
+      this.bsModalRef.content.title = 'Upload Reports';
+      console.log(uploadedReports);
+      this.bsModalRef.content.uploadedList = uploadedReports;
+    });
+    
    // this.bsModalRef.content.saved.take(1).subscribe(this.uploadNewReport.bind(this));
     //this.router.navigate(['/upload' , this.selectedSnapshot]);
   }

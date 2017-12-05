@@ -1,5 +1,5 @@
-<div class="modal-header">
-  <h4 class="modal-title pull-left">{{title}}</h4>
+<div class="modal-header header">
+  <label class="modal-title pull-left">{{title}}</label>
   <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -13,7 +13,7 @@
     </div>
     <div class="row">
       <div class="col-md-5 form-group">
-        <select id="reportType" formControlName='reportType' class="form-control" required>
+        <select id="reportType" formControlName='reportType' class="form-control custom-select" required>
       <option value="">Select one..</option>
       <option value="FinPulse">Finpulse Report </option>
       <option value="OSM">OSM Report</option>
@@ -29,26 +29,22 @@
         </div>
       </div>
 
-      <div class="uploadfile col-md-4 form-group" style=text-align:left>
-        <!--   <input type="file" id="myFile" size="35"> -->
-        <input type="file" id="reportFile" required  (change)="onReportFileChange($event)" #fileInput accept=".xlsx, .xls">
+      <div class="uploadfile col-md-6" style=text-align:left>
+        <input type="file" class="form-control-file" id="reportFile" #fileInput (change)="onReportFileChange($event)" accept=".xlsx, .xls">
         <p id="demo"></p>
-        <div *ngIf="form.invalid && (form.dirty || form.touched)" class="alert alert-danger">
-          <div *ngIf="">
-            Name is required.
-          </div>
-          <div *ngIf="form.get('reportFile').errors.validReport">
-            Report is already submitted.
-          </div>
+        <div *ngIf="inValidFileExtension" class="alert alert-danger">
+          <div>Please select valid file (xlsx, xls)</div>
         </div>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group pullRight">
       <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
-      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="submit" class="btn btn-primary" [disabled]='!form.valid && !inValidFileExtension'>Save</button>
     </div>
   </form>
-
+  <div *ngIf = "" class="alert alert-danger" role="alert">
+    <p>Please enter valid details</p>
+  </div>
 </div>
 <!-- <div class="modal-footer">
 </div> -->

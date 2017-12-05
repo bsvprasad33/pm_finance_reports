@@ -12,11 +12,11 @@ import { SnapshotCreationComponent } from './CreateSnapShot/snapshot-creation.co
 import { UploadReportsComponent } from './upload-reports/upload-reports.component';
 import { ViewReportsComponent } from './view-reports/view-reports.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
-import { ReportTypeValidatorDirective } from './report-type-validator.directive'
+import { FinanceReportsService } from './finance-reports.service'
 
 
 @NgModule({
-  declarations: [AppComponent, SnapshotDetailsComponent, VolumessDetailsComponent , SnapshotCreationComponent, UploadReportsComponent, ViewReportsComponent, FileUploadComponent, ReportTypeValidatorDirective],
+  declarations: [AppComponent, SnapshotDetailsComponent, VolumessDetailsComponent , SnapshotCreationComponent, UploadReportsComponent, ViewReportsComponent, FileUploadComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
@@ -39,7 +39,7 @@ import { ReportTypeValidatorDirective } from './report-type-validator.directive'
     ModalModule.forRoot()
   ],
   entryComponents : [FileUploadComponent],
-  providers: [],
+  providers: [FinanceReportsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

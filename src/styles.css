@@ -4,25 +4,32 @@
   height: 75px;
   background-color: #305886;
   margin-bottom: 20px;
-  box-shadow: 0 0.5rem 1rem rgba(0,0,0,.05), inset 0 -1px 0 rgba(0,0,0,.1);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, .05), inset 0 -1px 0 rgba(0, 0, 0, .1);
 }
 
 .header label {
   color: white;
-  margin: 20px;
+  margin: 10px;
   font-size: 30px;
   font-family: cursive;
-}   
+}
 
 .marginT10 {
   margin-top: 10px
 }
+
 .marginB10 {
   margin-bottom: 10px
 }
+
 .pullRight {
   float: right
 }
+
 .pullLeft {
   float: left
+}
+
+.borderStyle {
+  border-right: 1px solid rgba(0, 0, 0, .1)
 }
