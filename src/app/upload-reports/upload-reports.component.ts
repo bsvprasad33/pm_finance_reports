@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import 'rxjs/add/operator/take';
+import { Router } from '@angular/router';
+
+import { FileUploadComponent } from '../file-upload/file-upload.component'
 
 
 const snapshots = [{
@@ -38,7 +43,8 @@ class SnapShot {
 export class UploadReportsComponent implements OnInit {
   snapshots : SnapShot[] = snapshots;
   selectedSnapshot : number;
-  constructor() { }
+  bsModalRef : BsModalRef;
+  constructor(private router : Router , private modelService : BsModalService) { }
 
   ngOnInit() {
     console.log("upload reports");
@@ -50,5 +56,14 @@ export class UploadReportsComponent implements OnInit {
   getSnapShotDetails() : void{
    let snapshot = this.snapshots.map((snapshot) => snapshot.id === this.selectedSnapshot);
    console.log(snapshot);
+  }
+  uploadBEReports() : void {
+    this.bsModalRef  = this.modelService.show(FileUploadComponent);
+    this.bsModalRef.content.title = 'Upload Reports';
+   // this.bsModalRef.content.saved.take(1).subscribe(this.uploadNewReport.bind(this));
+    //this.router.navigate(['/upload' , this.selectedSnapshot]);
+  }
+  uploadNewReport(reportData : any) : void {
+    alert("data uploaded");
   }
 }

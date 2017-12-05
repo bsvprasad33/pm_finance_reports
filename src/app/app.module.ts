@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from "@angular/router";
-import { FormsModule } from "@angular/forms";
+import { FormsModule ,ReactiveFormsModule  } from "@angular/forms";
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 import { AppComponent } from './app.component';
@@ -9,11 +10,13 @@ import { SnapshotDetailsComponent } from './BeReports/snapshot-details.component
 import { VolumessDetailsComponent } from './VolumeReports/volumess-details.component'
 import { SnapshotCreationComponent } from './CreateSnapShot/snapshot-creation.component';
 import { UploadReportsComponent } from './upload-reports/upload-reports.component';
-import { ViewReportsComponent } from './view-reports/view-reports.component'
+import { ViewReportsComponent } from './view-reports/view-reports.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { ReportTypeValidatorDirective } from './report-type-validator.directive'
 
 
 @NgModule({
-  declarations: [AppComponent, SnapshotDetailsComponent, VolumessDetailsComponent , SnapshotCreationComponent, UploadReportsComponent, ViewReportsComponent],
+  declarations: [AppComponent, SnapshotDetailsComponent, VolumessDetailsComponent , SnapshotCreationComponent, UploadReportsComponent, ViewReportsComponent, FileUploadComponent, ReportTypeValidatorDirective],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
@@ -31,8 +34,11 @@ import { ViewReportsComponent } from './view-reports/view-reports.component'
         component : SnapshotDetailsComponent
       }
     ]),
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    ModalModule.forRoot()
   ],
+  entryComponents : [FileUploadComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

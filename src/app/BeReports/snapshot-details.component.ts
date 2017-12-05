@@ -1,7 +1,7 @@
 import { Component, OnInit , AfterViewInit , ViewChild} from "@angular/core";
 import { SnapshotCreationComponent } from '../CreateSnapShot/snapshot-creation.component';
 import { UploadReportsComponent } from '../upload-reports/upload-reports.component';
-import { ViewReportsComponent } from '../view-reports/view-reports.component'
+import { ViewReportsComponent } from '../view-reports/view-reports.component';
 
 
 @Component ({

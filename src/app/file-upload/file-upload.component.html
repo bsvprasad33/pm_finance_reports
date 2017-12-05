@@ -1,0 +1,54 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{title}}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="form" (ngSubmit)="save(form.value , form.valid)">
+    <div class="form-group">
+      <ul *ngFor="let list of uploadedList">
+        <li>{{list}}</li>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="col-md-5 form-group">
+        <select id="reportType" formControlName='reportType' class="form-control" required>
+      <option value="">Select one..</option>
+      <option value="FinPulse">Finpulse Report </option>
+      <option value="OSM">OSM Report</option>
+      <option value="RTBR">RTBR Report</option>
+    </select>
+        <div *ngIf="form.get('reportType').invalid && (form.get('reportType').dirty || form.get('reportType').touched)" class="alert alert-danger">
+          <div *ngIf="form.get('reportType').errors.required">
+            Name is required.
+          </div>
+          <div *ngIf="form.get('reportType').errors.validReport">
+            Report is already submitted.
+          </div>
+        </div>
+      </div>
+
+      <div class="uploadfile col-md-4 form-group" style=text-align:left>
+        <!--   <input type="file" id="myFile" size="35"> -->
+        <input type="file" id="reportFile" required  (change)="onReportFileChange($event)" #fileInput accept=".xlsx, .xls">
+        <p id="demo"></p>
+        <div *ngIf="form.invalid && (form.dirty || form.touched)" class="alert alert-danger">
+          <div *ngIf="">
+            Name is required.
+          </div>
+          <div *ngIf="form.get('reportFile').errors.validReport">
+            Report is already submitted.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+
+</div>
+<!-- <div class="modal-footer">
+</div> -->
