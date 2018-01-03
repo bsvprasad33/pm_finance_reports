@@ -1,0 +1,11 @@
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.mat-header-row {
+  background-color: #305886;
+  color: white;
+  position: sticky;
+  top: 0;
+}

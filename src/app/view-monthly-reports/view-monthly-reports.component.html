@@ -1,0 +1,44 @@
+<p>
+  Monthly Reports!
+</p>
+
+<div *ngIf='dataSource'>
+    <mat-table #table [dataSource]="dataSource">
+      <ng-container matColumnDef="PortFolio">
+        <mat-header-cell *matHeaderCellDef> PortFolios </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.portfolio}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="M1">
+        <mat-header-cell *matHeaderCellDef> M1 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.m1}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="M2">
+        <mat-header-cell *matHeaderCellDef> M2 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.m2}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="M3">
+        <mat-header-cell *matHeaderCellDef> M3 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.m3}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="RTIn">
+        <mat-header-cell *matHeaderCellDef> RTIn </mat-header-cell>
+        <mat-cell *matCellDef="let element"> 
+         <div class="input-sm"> <input value="{{element.rtIn}}" class="form-control" /></div>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="RTOut">
+        <mat-header-cell *matHeaderCellDef> RTOut </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div class="input-sm"> <input value="{{element.rtOut}}" class="input-sm form-control" /></div>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Total">
+        <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.total}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+  </div>

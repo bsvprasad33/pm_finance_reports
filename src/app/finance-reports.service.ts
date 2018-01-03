@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import { SnapShot } from './CreateSnapShot/snapshot'
+import { SnapShot } from './models/snapshot'
 import { SnapshotDetails } from './mock-data/snapshot-details'
 
 import * as _ from 'lodash';

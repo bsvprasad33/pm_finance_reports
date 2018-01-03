@@ -9,3 +9,12 @@
   position: sticky;
   top: 0;
 }
+
+.mat-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+.input-sm {
+  width: 80% !important;
+}

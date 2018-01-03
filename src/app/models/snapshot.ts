@@ -1,4 +1,4 @@
-export class SnapShot {
+export interface SnapShot {
   id: number;
   name: string;
   description: string;

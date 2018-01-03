@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import {MatTableDataSource,MatPaginator} from '@angular/material';
 import 'rxjs/add/operator/take';
 import { Router } from '@angular/router';
-import { SnapShot } from '../CreateSnapShot/snapshot'
+import { SnapShot } from '../models/snapshot'
 import { FinanceReportsService } from '../finance-reports.service';
 
 import { FileUploadComponent } from '../file-upload/file-upload.component'
@@ -19,10 +20,14 @@ export class UploadReportsComponent implements OnInit {
   snapshots : SnapShot[];
   selectedSnapshot : number;
   bsModalRef : BsModalRef;
+  displayedColumns = ["Select" , "Snapshot Name" , "Description" , "Date"];
+  dataSource ;
   constructor(private router : Router , private modelService : BsModalService, private financeReportsService : FinanceReportsService) { }
 
   ngOnInit() {
-    this.financeReportsService.getSnapShotDetails().then(snapshotDetails => this.snapshots = snapshotDetails);
+    this.financeReportsService.getSnapShotDetails().then(snapshotDetails => {
+        this.dataSource = new MatTableDataSource(snapshotDetails);
+    });
   }
   
   SelectSnapShot(snapshot : SnapShot) : void {

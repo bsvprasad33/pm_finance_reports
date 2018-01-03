@@ -1,4 +1,4 @@
- import { SnapShot } from '../CreateSnapShot/snapshot'
+ import { SnapShot } from '../models/snapshot'
  
  export const SnapshotDetails : SnapShot[] =[{
     "id" : 1,

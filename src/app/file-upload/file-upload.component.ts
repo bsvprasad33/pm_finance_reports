@@ -1,33 +1,10 @@
-import {
-  Component,
-  OnInit,
-  EventEmitter,
-  ElementRef,
-  ViewChild
-} from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  ValidatorFn,
-  FormBuilder,
-  FormGroup,
-  Validators
-} from "@angular/forms";
-
-import {
-  ActivatedRoute,
-  ParamMap,
-  Params
-} from '@angular/router'
+import { Component,  OnInit,  EventEmitter,  ElementRef,  ViewChild} from '@angular/core';
+import {  AbstractControl,  FormControl,  ValidatorFn,  FormBuilder,  FormGroup,  Validators} from "@angular/forms";
+import {  ActivatedRoute,  ParamMap,  Params} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import {
-  Location
-} from '@angular/common';
-import {
-  BsModalRef
-} from 'ngx-bootstrap';
+import {  Location} from '@angular/common';
+import {  BsModalRef} from 'ngx-bootstrap';
 import { FinanceReportsService } from '../finance-reports.service';
-
 
 
 

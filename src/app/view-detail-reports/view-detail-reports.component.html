@@ -1,0 +1,13 @@
+<p>
+  view-detail-reports works!
+</p>
+<div class="row">
+  <div class="col-md-6">
+     <app-view-yearly-reports [yearlyReports] = 'yearlyReports'></app-view-yearly-reports>
+  </div>
+  <div class="col-md-6">
+    <app-view-monthly-reports [monthlyReports] = 'monthlyReports'></app-view-monthly-reports>
+  </div>
+  
+</div>
+<button class="marginT10 button button-sm" (click)="goBack()">Back</button>

@@ -6,37 +6,36 @@
       </div>
     </div>
     <div class="panel-body">
-      <table class="table table-stripped">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Select</th>
-            <th scope="col">Snapshot Name</th>
-            <th scope="col">RTBR</th>
-            <th scope="col">Finpulse</th>
-            <th scope="col">OMS</th>
-            <th scope="col">Process</th>
-            <th scope="col">View Dashboard</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let snapshot of snapshots">
-            <th scope="row">
-              <input type="checkbox" name="selection" (click)="SelectSnapShot(snapshot)" />
-            </th>
-            <td>{{snapshot.name}}</td>
-            <td>{{snapshot.RTBR}}</td>
-            <td>{{snapshot.Finpulse}}</td>
-            <td>{{snapshot.OMS}}</td>
-            <td><button type="submit" id="Generate" class="btn btn-primary" [class.btn-primary] = "snapshot.RTBR && snapshot.Finpulse && snapshot.OMS" >Generate</button></td>
-            <td><button type="submit" id="viewDetails" class="btn btn-primary">View</button></td>
-          </tr>
-        </tbody>
-      </table>
+      <mat-table #table [dataSource]="dataSource">
+        <ng-container matColumnDef="SnapShot Name">
+          <mat-header-cell *matHeaderCellDef> SnapShot Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="RTBR">
+          <mat-header-cell *matHeaderCellDef> RTBR </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.RTBR}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="FinPulse">
+          <mat-header-cell *matHeaderCellDef> FinPulse </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Finpulse}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Process">
+          <mat-header-cell *matHeaderCellDef> Process </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button type="submit" id="Generate" class="btn btn-primary" [disabled]="!element.RTBR || !element.Finpulse" [class.btn-primary]="element.RTBR && element.Finpulse">Generate</button>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="View Dashboard">
+          <mat-header-cell *matHeaderCellDef> View Dashboard </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button type="submit" id="viewDetails" (click)="viewDetailsreport(element)" [disabled]="!element.RTBR || !element.Finpulse"
+              class="btn btn-primary" [class.btn-primary]="element.RTBR && element.Finpulse">View</button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
     </div>
   </div>
 </form>
-<!--<ul class="heroes">
-    <li *ngFor = "let snapshot of snapshots">
-        <span class="badge">{{snapshot.id}}</span> {{snapshot.name}}
-    </li>
-  </ul> -->

@@ -6,34 +6,33 @@
       </div>
     </div>
     <div class="panel-body">
-      <table class="table table-stripped">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Select</th>
-            <th scope="col">Snapshot Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let snapshot of snapshots">
-            <th scope="row">
-              <input type="radio" name="selection" (click)="SelectSnapShot(snapshot)" />
-            </th>
-            <td>{{snapshot.name}}</td>
-            <td>{{snapshot.description}}</td>
-            <td>11/23/2017</td>
-          </tr>
-        </tbody>
-      </table>
+      <mat-table #table [dataSource]="dataSource">
+        <ng-container matColumnDef="Select">
+          <mat-header-cell *matHeaderCellDef> Select </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <div> <input type="radio" name="selection" (click)="SelectSnapShot(element)" /></div>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Snapshot Name">
+          <mat-header-cell *matHeaderCellDef> Snapshot Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Description">
+          <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Date">
+          <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            11/23/2017
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
     </div>
     <div class="panel-footer controls">
-      <button type="submit" class="btn btn-primary pullRight" data-toggle="modal"  (click)="uploadBEReports()"> Upload </button>
+      <button type="submit" class="btn btn-primary pullRight marginT10" data-toggle="modal" (click)="uploadBEReports()"> Upload </button>
     </div>
   </div>
 </form>
-<!--<ul class="heroes">
-    <li *ngFor = "let snapshot of snapshots">
-        <span class="badge">{{snapshot.id}}</span> {{snapshot.name}}
-    </li>
-  </ul> -->
