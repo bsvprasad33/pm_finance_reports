@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions, URLSearchParams } 
-from '@angular/http';
+import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 import { Subject } from 'rxjs/Subject';
@@ -18,7 +17,7 @@ export class FinanceReportsService {
   constructor( private http : Http) { }
 
   public getSnapShotDetails() : Promise <SnapShot[]> {
-    return this.http.get( "/allSnapShots").toPromise()
+    return this.http.get(this.basePath+"/allSnapShots").toPromise()
             .then(this.extractData)
             .catch(this.handleError);
   }
