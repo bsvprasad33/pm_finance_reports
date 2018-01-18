@@ -8,7 +8,7 @@ import { FinanceReportsService } from '../finance-reports.service';
 
 
 
-const uploadedList = ["RTBR", "FinPulse"];
+const uploadedList = ["RTBR"];
 @Component({
   selector: 'file-upload',
   templateUrl: './file-upload.component.html',

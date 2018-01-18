@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions, URLSearchParams } 
+from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/toPromise';
 import { Subject } from 'rxjs/Subject';
+
+
 import { SnapShot } from './models/snapshot'
 import { SnapshotDetails } from './mock-data/snapshot-details'
 
@@ -9,12 +14,28 @@ import * as XLSX from 'ts-xlsx';
 
 @Injectable()
 export class FinanceReportsService {
-
-  constructor() { }
+    private basePath = "http://localhost:8080/rest/api"
+  constructor( private http : Http) { }
 
   public getSnapShotDetails() : Promise <SnapShot[]> {
-      return Promise.resolve(SnapshotDetails);
+    return this.http.get( "/allSnapShots").toPromise()
+            .then(this.extractData)
+            .catch(this.handleError);
   }
+
+
+    private extractData(res: Response) {
+        let body = res.json();
+        return body || {};
+    }
+
+    private handleError(error: any): Promise<any> {
+        console.error('An error occurred', error);
+        return Promise.reject(error.message || error);
+    }
+
+
+
 
   public getTransactionDetails(id : number) : Promise <Array<string>> {
       console.log(id + "::::: transaction Id");

@@ -19,6 +19,6 @@
     </div>
   </div>
   <div class="panel-footer controls">
-    <button type="submit" class="btn btn-primary pullRight" (click)="saveSnapshotDetails()"> Save </button>
+    <button type="submit" class="btn btn-primary pullRight"  [disabled] = "!snapshotName" (click)="saveSnapshotDetails()"> Save </button>
   </div>
 </div>

@@ -25,9 +25,11 @@ export class UploadReportsComponent implements OnInit {
   constructor(private router : Router , private modelService : BsModalService, private financeReportsService : FinanceReportsService) { }
 
   ngOnInit() {
-    this.financeReportsService.getSnapShotDetails().then(snapshotDetails => {
+    this.financeReportsService.getSnapShotDetails()
+    .then(snapshotDetails => {
         this.dataSource = new MatTableDataSource(snapshotDetails);
-    });
+    })
+    .catch(error => console.log(error));;
   }
   
   SelectSnapShot(snapshot : SnapShot) : void {

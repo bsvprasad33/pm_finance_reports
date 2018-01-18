@@ -138,7 +138,7 @@ export const QUATERLY_DATA : MonthlyReports[] = [
         m1: 3,
         m2: 3,
         m3 : 3,
-        rtIn : 0,
+        rtIn : 3,
         rtOut: 0,
         total : 9
     },

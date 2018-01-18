@@ -1,6 +1,6 @@
 .mat-table {
   overflow: auto;
-  max-height: 500px;
+  max-height: 250px;
 }
 
 .mat-header-row {
@@ -17,4 +17,13 @@
 }
 .input-sm {
   width: 80% !important;
+}
+.mat-header-cell {
+  border-right: 2px solid grey;
+  margin: 10px;
+  text-align: center;
+}
+
+.mat-cell {
+  text-align: center;
 }
