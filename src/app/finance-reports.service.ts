@@ -13,11 +13,17 @@ import * as XLSX from 'ts-xlsx';
 
 @Injectable()
 export class FinanceReportsService {
-        private basePath = "http://localhost:8080/rest/api"
-        constructor( private http : Http) { }
+        private basePath = "http://localhost:8080/rest/api";
+        headers: Headers;
+        options: RequestOptions;
+        constructor( private http : Http) { 
+            this.headers = new Headers({ 'Content-Type': 'application/json', 
+                                       'Accept': 'q=0.8;application/json;q=0.9' });
+          this.options = new RequestOptions({ headers: this.headers });
+        }
 
         public getSnapShotDetails() : Promise <SnapShot[]> {
-            return this.http.get(this.basePath+"/allSnapShots").toPromise()
+            return this.http.get(this.basePath+"/allSnapShots" , this.options).toPromise()
                     .then(this.extractData)
                     .catch(this.handleError);
         }
@@ -33,7 +39,7 @@ export class FinanceReportsService {
 
         public saveSnapshotDetails(snapShotModel : any) : Promise<any> {
             var data = JSON.stringify(snapShotModel);
-            return this.http.post(this.basePath+"/add",data).toPromise()
+            return this.http.post(this.basePath+"/add",data, this.options).toPromise()
                     .then(this.extractData)
                     .catch(this.handleError); 
         }
