@@ -13,102 +13,102 @@ import * as XLSX from 'ts-xlsx';
 
 @Injectable()
 export class FinanceReportsService {
-    private basePath = "http://localhost:8080/rest/api"
-  constructor( private http : Http) { }
+        private basePath = "http://localhost:8080/rest/api"
+        constructor( private http : Http) { }
 
-  public getSnapShotDetails() : Promise <SnapShot[]> {
-    return this.http.get(this.basePath+"/allSnapShots").toPromise()
-            .then(this.extractData)
-            .catch(this.handleError);
-  }
-
-
-    private extractData(res: Response) {
-        let body = res.json();
-        return body || {};
-    }
-
-    private handleError(error: any): Promise<any> {
-        console.error('An error occurred', error);
-        return Promise.reject(error.message || error);
-    }
-
-
-
-
-  public getTransactionDetails(id : number) : Promise <Array<string>> {
-      console.log(id + "::::: transaction Id");
-   return Promise.resolve(["RTBR", "FinPulse"]);   
-  }
-
-  public processFileToJson(object,file): Observable<any> {
-        let reader = new FileReader();
-        let _this = this;
-        
-        return Observable.create(observer => {
-            reader.onload = function (e) {
-                let data = e.target['result'];
-                let workbook = XLSX.read(data, {
-                    type: 'binary'
-                });
-                object.sheets = _this.parseWorksheet(workbook, true, true);
-                observer.next(object);
-                observer.complete();
-            }
-            reader.readAsBinaryString(file);
-        });
-    }
-
-
-    parseWorksheet(workbook, readCells, toJSON) {
-        if (toJSON === true) {
-            return this.to_json(workbook);
+        public getSnapShotDetails() : Promise <SnapShot[]> {
+            return this.http.get(this.basePath+"/allSnapShots").toPromise()
+                    .then(this.extractData)
+                    .catch(this.handleError);
         }
-        let sheets = {};
-        var _this = this;
-        _.forEachRight(workbook.SheetNames, function (sheetName) {
-            let sheet = workbook.Sheets[sheetName];
-            sheets[sheetName] = _this.parseSheet(sheet, readCells);
-        });
-        return sheets;
-    }
+        private extractData(res: Response) {
+            let body = res.json();
+            return body || {};
+        }
 
-    parseSheet(sheet, readCells) {
-        let range = XLSX.utils.decode_range(sheet['!ref']);
-        let sheetData = [];
+        private handleError(error: any): Promise<any> {
+            console.error('An error occurred', error);
+            return Promise.reject(error.message || error);
+        }
 
-        if (readCells === true) {
-            _.forEachRight(_.range(range.s.r, range.e.r + 1), function (row) {
-                let rowData = [];
-                _.forEachRight(_.range(range.s.c, range.e.c + 1), function (column) {
-                    let cellIndex = XLSX.utils.encode_cell({
-                        'c': column,
-                        'r': row
-                    });
-                    let cell = sheet[cellIndex];
-                    rowData[column] = cell ? cell.v : undefined;
+        public saveSnapshotDetails(snapShotModel : any) : Promise<any> {
+            var data = JSON.stringify(snapShotModel);
+            return this.http.post(this.basePath+"/add",data).toPromise()
+                    .then(this.extractData)
+                    .catch(this.handleError); 
+        }
+
+        public getTransactionDetails(id : number) : Promise <Array<string>> {
+            console.log(id + "::::: transaction Id");
+        return Promise.resolve(["RTBR", "FinPulse"]);   
+        }
+
+        public processFileToJson(object,file): Observable<any> {
+                let reader = new FileReader();
+                let _this = this;
+                
+                return Observable.create(observer => {
+                    reader.onload = function (e) {
+                        let data = e.target['result'];
+                        let workbook = XLSX.read(data, {
+                            type: 'binary'
+                        });
+                        object.sheets = _this.parseWorksheet(workbook, true, true);
+                        observer.next(object);
+                        observer.complete();
+                    }
+                    reader.readAsBinaryString(file);
                 });
-                sheetData[row] = rowData;
+            }
+        parseWorksheet(workbook, readCells, toJSON) {
+            if (toJSON === true) {
+                return this.to_json(workbook);
+            }
+            let sheets = {};
+            var _this = this;
+            _.forEachRight(workbook.SheetNames, function (sheetName) {
+                let sheet = workbook.Sheets[sheetName];
+                sheets[sheetName] = _this.parseSheet(sheet, readCells);
             });
+            return sheets;
         }
 
-        return {
-            'sheet': sheetData,
-            'name': sheet.name,
-            'col_size': range.e.c + 1,
-            'row_size': range.e.r + 1
-        }
-    }
+        parseSheet(sheet, readCells) {
+            let range = XLSX.utils.decode_range(sheet['!ref']);
+            let sheetData = [];
 
-    to_json(workbook) {
-        let result = {};
-        workbook.SheetNames.forEach(function (sheetName) {
-            let roa = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-            if (roa.length > 0) {
-                result[sheetName] = roa;
+            if (readCells === true) {
+                _.forEachRight(_.range(range.s.r, range.e.r + 1), function (row) {
+                    let rowData = [];
+                    _.forEachRight(_.range(range.s.c, range.e.c + 1), function (column) {
+                        let cellIndex = XLSX.utils.encode_cell({
+                            'c': column,
+                            'r': row
+                        });
+                        let cell = sheet[cellIndex];
+                        rowData[column] = cell ? cell.v : undefined;
+                    });
+                    sheetData[row] = rowData;
+                });
             }
-        });
-        return result;
-    }
+
+            return {
+                'sheet': sheetData,
+                'name': sheet.name,
+                'col_size': range.e.c + 1,
+                'row_size': range.e.r + 1
+            }
+        }
+
+        to_json(workbook) {
+            let result = {};
+            workbook.SheetNames.forEach(function (sheetName) {
+                let roa = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+                if (roa.length > 0) {
+                    result[sheetName] = roa;
+                }
+            });
+            return result;
+        }
 
 }

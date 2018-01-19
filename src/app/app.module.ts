@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from "@angular/router";
 import { FormsModule ,ReactiveFormsModule  } from "@angular/forms";
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { HttpModule } from '@angular/http';
 
 
 import { AppComponent } from './app.component';
@@ -19,6 +20,7 @@ import { FinanceReportsService } from './finance-reports.service';
   imports: [
     BrowserModule,
     BeReportsModule,
+    HttpModule,
     RouterModule.forRoot([
       {
           path : "volumeReports",
