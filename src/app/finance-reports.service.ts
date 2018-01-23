@@ -23,7 +23,7 @@ export class FinanceReportsService {
         }
 
         public getSnapShotDetails() : Promise <SnapShot[]> {
-            return this.http.get(this.basePath+"/allSnapShots" , this.options).toPromise()
+            return this.http.get(this.basePath+"/allSnapShots" , { headers: this.headers }).toPromise()
                     .then(this.extractData)
                     .catch(this.handleError);
         }
@@ -38,8 +38,8 @@ export class FinanceReportsService {
         }
 
         public saveSnapshotDetails(snapShotModel : any) : Promise<any> {
-            var data = JSON.stringify(snapShotModel);
-            return this.http.post(this.basePath+"/add",data, this.options).toPromise()
+            let data = JSON.stringify(snapShotModel);
+            return this.http.post(this.basePath+"/add",data, { headers: this.headers }).toPromise()
                     .then(this.extractData)
                     .catch(this.handleError); 
         }
